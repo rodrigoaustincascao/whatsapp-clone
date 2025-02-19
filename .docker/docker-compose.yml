@@ -23,10 +23,13 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-    networks:
-      - whatsapp-clone
     command:
       - "start-dev"
+      - --import-realm
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    networks:
+      - whatsapp-clone
 
 networks:
   whatsapp-clone:
