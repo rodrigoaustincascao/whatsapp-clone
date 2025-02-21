@@ -1,0 +1,88 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
+{
+    "name": "whatsapp-clone",
+    "dockerComposeFile": "../.docker/docker-compose.yml",
+    "service": "whatsapp-clone-api",
+    "workspaceFolder": "/whatsapp-clone",
+    "features": {
+        // "ghcr.io/devcontainers-contrib/features/bash-command:1": {}
+    },
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {}
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // This can be used to network with other containers or with the host.
+    // "forwardPorts": [5432],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "java -version",
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.detectIndentation": false,
+                "java.jdt.ls.java.home": "/docker-java-home",
+                "maven.executable.path": "/usr/local/sdkman/candidates/maven/current/bin/mvn",
+                // "java.configuration.maven.userSettings": "/home/vscode/.m2/m2Settings.xml",
+                "tasks": {
+                    "version": "2.0.0",
+                    "tasks": [
+                        {
+                            "label": "whatsapp-clone",
+                            "type": "shell",
+                            "command": " cd ./whatsappclone && mvn spring-boot:run",
+                            "group": "build",
+                            "presentation": {
+                                "reveal": "always",
+                                "panel": "new",
+                                "echo": true
+                            }
+                        },
+                        // {
+                        //     "label": "Api",
+                        //     "type": "shell",
+                        //     "command": "cd ./api && mvn spring-boot:run",
+                        //     "group": "build",
+                        //     "presentation": {
+                        //         "reveal": "always",
+                        //         "panel": "new",
+                        //         "echo": true
+                        //     }
+                        // },
+                        // {
+                        //     "label": "angular",
+                        //     "type": "shell",
+                        //     "command": "cd ./angular && npm start",
+                        //     "group": "build",
+                        //     "presentation": {
+                        //         "reveal": "always",
+                        //         "panel": "new",
+                        //         "echo": true
+                        //     }
+                        // },
+                        {
+                            "label": "Build",
+                            "dependsOn": [
+                                "whatsapp-clone"
+                                // "Api",
+                                // "angular"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "extensions": [
+                "vmware.vscode-boot-dev-pack",
+                "vscjava.vscode-java-pack",
+                "ryanluker.vscode-coverage-gutters",
+                "humao.rest-client",
+                "ms-azuretools.vscode-docker",
+                "angular.ng-template",
+                "johnpapa.angular2"
+            ]
+        }
+    }
+    // "postStartCommand": "cd ./angular && npm install && npm start"
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}
